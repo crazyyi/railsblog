@@ -13,4 +13,12 @@
 		<%= @post.body %>
 	</p>
 
+	<div id="comments">
+		<h2><%= pluralize(@post.comments.count, "Comment") %></h2>
+		<%= render @post.comments %>
+
+		<h3>Add A Comment</h3>
+		<%= render "comments/form" %>
+	</div>
+
 </div>
