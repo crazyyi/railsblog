@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show]
+	
 	def index
 		@posts = Post.all.order('created_at DESC')
 	end
@@ -9,6 +11,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@new_comment = Comment.build_from(@post, nil, "", "", "")
 	end
 
 	def edit

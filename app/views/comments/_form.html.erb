@@ -1,16 +1,34 @@
-<%= form_for([@post, @post.comments.build]) do |f| %>
-	<p>
-		<%= f.label :name %><br>
-		<%= f.text_field :name %>
-	</p>
+<%= form_for @new_comment do |f| %>  
 
-	<p>
-		<%= f.label :body %><br>
-		<%= f.text_area :body %>
-	</p>
+	<% if @new_comment.errors.any? %>
+		<div id="errors">
+			<h2><%= pluralize(@new_comment.errors.count, "error") %> encountered, please check your input.</h2>
 
-	<br>
-	<p>
-		<%= f.submit "Submit" %>
-	</p>
-<% end %>
+			<ul>
+				<% @new_comment.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+  <%= f.hidden_field :commentable_id, value: @new_comment.commentable_id %>
+  <%= f.hidden_field :commentable_type, value: @new_comment.commentable_type %>
+  <%= f.hidden_field :user, value: current_user %>
+  <div class="field">
+  	<%= f.label :first_name %>:
+  	<%= f.text_field :first_name, size: 20 %>
+  </div>
+
+  <div class="field">
+  	<%= f.label :last_name %>:
+  	<%= f.text_field :last_name, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.text_area :body %>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.submit "Post comment" %>
+  </div>
+<% end %>  

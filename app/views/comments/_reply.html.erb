@@ -1,0 +1,36 @@
+<% comments.each do |comment| %>  
+<div class="comments-show">
+  <div class="comment">
+    <p id="author"><%= displayed_name(comment) %> - <%= time_ago_in_words(comment.created_at) %> ago</p><br>
+    <p id="comment-body"><%= comment.body %></p><br>
+    <div class="comment-nav">
+      <span class="text"><a href="#" class="comment-reply">Reply</a></span>
+    </div>
+    <div class="reply-form">
+      <%= simple_form_for @new_comment do |f| %>
+      <%= f.hidden_field :commentable_id, value: @new_comment.commentable_id %>
+      <%= f.hidden_field :commentable_type, value: @new_comment.commentable_type %>
+      <%= f.hidden_field :comment_id, value: comment.id %>
+      <%= f.hidden_field :user, value: current_user %>
+      <div class="field">
+        <%= f.label :first_name %>:
+        <%= f.text_field :first_name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %>:
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="field">
+        <%= f.text_area :body %>
+      </div>
+      <br>
+      <div class="field">
+        <%= submit_tag "Post Reply" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render partial: "comments/reply", locals: {comments: comment.children} %>
+</div>
+<% end %>  

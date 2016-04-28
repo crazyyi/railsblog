@@ -201,7 +201,10 @@ a {
 					float: right;
 				}
 			}
-			input[type="text"], textarea {
+			input[type="text"] {
+				width: 40%;
+			}
+			textarea {
 				width: 50%;
 			}
 		}

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :posts do
-  	resources :comments
-  end
+  devise_for :users
+  resources :posts 
   
+  resources :comments, defaults: { format: 'json' }
+
   root "posts#index"
 
   get '/about', to: 'pages#about'

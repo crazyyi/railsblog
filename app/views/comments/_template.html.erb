@@ -1,0 +1,11 @@
+<div class="comments-header">  
+  <h4>
+    <%= pluralize(commentable.comment_threads.count, 'comment') %>
+  </h4>
+</div>
+<div class="comments-container">  
+  <%= render partial: "comments/reply", locals: {comments: commentable.root_comments} %>
+</div>  
+
+<%= render partial: "comments/form", locals: {new_comment: new_comment} %>
+
