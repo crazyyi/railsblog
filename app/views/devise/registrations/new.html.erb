@@ -8,10 +8,12 @@
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name, autofocus: true %>
   </div>
+  <br />
   <div class="field">
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name, autofocus: true %>
   </div>
+  <br />
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autocomplete: "off" %>
@@ -35,6 +37,9 @@
   </div>
   <br>
   <% end %>
-</div>
+
+<br/>
 <%= render "devise/shared/links" %>
+
+</div>
 
