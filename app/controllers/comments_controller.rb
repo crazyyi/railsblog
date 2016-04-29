@@ -1,9 +1,5 @@
 class CommentsController < ApplicationController
 
-	def new
-		@comment = build_comment(comment_params)
-	end
-
 	def create
 		@comment = build_comment(comment_params)
 		respond_to do |format|

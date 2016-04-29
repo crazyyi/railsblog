@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 4.0.0'
 gem 'simple_form', '~> 3.2.1'
 gem 'acts_as_commentable_with_threading', '~> 2.0.1'
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'friendly_id', '~> 5.1.0'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
