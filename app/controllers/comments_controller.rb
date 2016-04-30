@@ -1,16 +1,15 @@
 class CommentsController < ApplicationController
 
 	def create
-		@comment = build_comment(comment_params)
+		@new_comment = build_comment(comment_params)
 		respond_to do |format|
-			if @comment.save
+			if @new_comment.save
 				make_child_comment
-				format.html
-				format.json { redirect_to(:back, :notice => 'Comment was successfully added.')}
+				format.html { redirect_to(:back, :notice => 'Comment was successfully added.')}
 			else
-				p @comment.errors
-				format.html
-				format.json { redirect_to :back }
+				commentable = commentable_type.constantize.find(commentable_id)
+				format.html { render template: 'posts/show', locals: {:@post => commentable} }
+				format.json { render json: @new_comment.errors }
 			end
 		end
 	end
@@ -40,7 +39,7 @@ class CommentsController < ApplicationController
 			return "" if comment_id.blank?
 
 			parent_comment = Comment.find comment_id
-			@comment.move_to_child_of(parent_comment)
+			@new_comment.move_to_child_of(parent_comment)
 		end
 
 		def build_comment(comment_params)
